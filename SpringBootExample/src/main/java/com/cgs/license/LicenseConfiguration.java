@@ -44,7 +44,6 @@ public class LicenseConfiguration {
 
 		System.out.println("licensePath  ******** " + licensePath);
 
-		
 		String filename = licensePath + instId + "License.txt".trim();
 		String encryptFile = (licensePath + instId + "_enctrypted_License.txt");
 
@@ -52,18 +51,16 @@ public class LicenseConfiguration {
 
 		System.out.println(resMap);
 
-		
-
 		// Equivalent JAVA-8 Code below
 		Entry<String, String> orElseThrow = resMap.entrySet().parallelStream()
 				.filter(cuiid -> cuiid.getKey().equals("SCC-0")).findFirst()
 				.orElseThrow(() -> new InstitutionNotFoundException(
 						"Instituation Not Found !! Please check the Inst Id !!!"));
 		
+	
+
 		return new ResponseEntity<>(orElseThrow.getValue(), HttpStatus.CREATED);
 
-		
-		
 		// Find JAVA 7 Code below
 
 		/*

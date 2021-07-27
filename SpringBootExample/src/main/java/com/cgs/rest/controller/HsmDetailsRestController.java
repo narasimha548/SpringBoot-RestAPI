@@ -2,6 +2,8 @@ package com.cgs.rest.controller;
 
 import java.util.List;
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +35,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RequestMapping("/hsmDetails")
 public class HsmDetailsRestController {
 
-	
+	@Autowired
 	private HsmService hsmService;
 
 	public HsmDetailsRestController(HsmService hsmService) {

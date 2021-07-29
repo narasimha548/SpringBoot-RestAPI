@@ -1,5 +1,6 @@
 package com.cgs.entiy;
 
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,9 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -71,6 +75,7 @@ public class HsmDetailsEntity {
 	private String addedBy;
 
 	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date addedDate;
 
 	private String remarks;

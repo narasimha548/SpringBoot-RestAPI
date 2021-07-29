@@ -1,6 +1,7 @@
 package com.cgs.exception;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.web.context.request.WebRequest;
 import com.cgs.error.response.ErrorResponse;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ControllerAdvice
@@ -54,5 +56,19 @@ public class ExceptionHelper {
 		return new ResponseEntity<Object>(body,headers,status);
 
 	}
+	
+	@ExceptionHandler(HsmEntityToDtoConversionException.class)
+	public final ResponseEntity<Object>  entityToDtoConversionException(HsmEntityToDtoConversionException exce,WebRequest req) throws Exception{
+		List<String> lst=Arrays.asList(exce.getLocalizedMessage());
+		ErrorResponse error = new ErrorResponse("HSmEntityToDTOCOnversion", lst);
+		
+		ObjectMapper objectMap = new ObjectMapper();
+		objectMap.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+		String json = objectMap.writeValueAsString(error);
+		return new ResponseEntity<Object>(json, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
 
 }

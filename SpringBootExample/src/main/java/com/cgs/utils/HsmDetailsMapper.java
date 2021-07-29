@@ -1,5 +1,6 @@
 package com.cgs.utils;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +9,7 @@ import com.cgs.dto.HsmDetailsDto;
 import com.cgs.entiy.HsmDetailsEntity;
 
 /**
- * This class is used to convert the List of Object data to DTO List 
+ * This class is used to convert the List of Object data to DTO List
  * 
  * @author Prasad
  * @version 1.0
@@ -17,18 +18,17 @@ import com.cgs.entiy.HsmDetailsEntity;
  *
  */
 public class HsmDetailsMapper {
-	
+
 	/**
 	 * This method is used to process List of Object to Custom List Objects
 	 * 
 	 * @param hsmDtlsObjArray
 	 * @return List<HsmDetailsDto>
 	 */
-	public  static List<HsmDetailsDto> processEntityToDto(List<HsmDetailsEntity> hsmDtlsList){
-		
-		
-		return hsmDtlsList.stream().map(dto->{
-			HsmDetailsDto hsmDto=new HsmDetailsDto();
+	public static List<HsmDetailsDto> processEntityToDto(List<HsmDetailsEntity> hsmDtlsList) {
+
+		return hsmDtlsList.stream().map(dto -> {
+			HsmDetailsDto hsmDto = new HsmDetailsDto();
 			hsmDto.setHsmId(dto.getHsmId());
 			hsmDto.setAddedBy(dto.getAddedBy());
 			hsmDto.setAddedDate(dto.getAddedDate());
@@ -50,8 +50,7 @@ public class HsmDetailsMapper {
 			return hsmDto;
 		}).collect(Collectors.toList());
 	}
-	
-	
+
 	/**
 	 * This method is used to process List of Object Arrays to Custom List Objects
 	 * 
@@ -62,7 +61,8 @@ public class HsmDetailsMapper {
 
 		return hsmDtlsObjArray.stream().map(curObj -> {
 			HsmDetailsDto dto = new HsmDetailsDto();
-			dto.setHsmId((Integer) curObj[0]);
+			dto.setHsmId(Integer.parseInt(((BigDecimal) curObj[0]).toString()));
+			// dto.setHsmId((Integer) curObj[0]);
 			dto.setAddedBy((String) curObj[1]);
 			dto.setAddedDate((Date) curObj[2]);
 			dto.setAuthBy((String) curObj[3]);
@@ -85,6 +85,5 @@ public class HsmDetailsMapper {
 		}).collect(Collectors.toList());
 
 	}
-
 
 }
